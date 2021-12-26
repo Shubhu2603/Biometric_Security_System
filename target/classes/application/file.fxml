@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="720.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+   <center>
+      <TitledPane alignment="CENTER" collapsible="false" ellipsisString="" lineSpacing="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="712.0" text="Door Unlocking Based On Face Detection Based on IoT" textAlignment="CENTER" textFill="#393736" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="429.0" prefWidth="669.0">
+               <children>
+                  <ImageView fx:id="frame" fitHeight="472.0" fitWidth="723.0" layoutX="-3.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-17.0">
+                     <viewport>
+                        <Rectangle2D width="700.0" />
+                     </viewport></ImageView>
+                  <Button fx:id="capBtn" disable="true" layoutX="622.0" layoutY="380.0" minHeight="47.0" mnemonicParsing="false" onAction="#capture" prefHeight="47.0" prefWidth="90.0" styleClass="capture" stylesheets="@application.css" visible="false">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Button>
+                  
+                  <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" text="Stop" visible="false" />
+                  <Label fx:id="savedLabel" layoutX="282.0" layoutY="207.0" prefHeight="52.0" prefWidth="215.0" text=" Face  Saved !" underline="true" visible="false">
+                     <font>
+                        <Font name="Vonique 92" size="25.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                           <stops>
+                              <Stop color="#bc2b30" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <ProgressIndicator fx:id="pb" layoutX="360.0" layoutY="156.0" progress="0.0" visible="false" />
+                  <Button fx:id="ocrBtn" disable="false" layoutX="623.0" layoutY="428.0" mnemonicParsing="false" onAction="#ocrStart" prefHeight="52.0" prefWidth="85.0" styleClass="ocr" stylesheets="@application.css" visible="false" />
+                  <Button fx:id="gesture" disable="true" layoutX="621.0" layoutY="3.0" mnemonicParsing="false" onAction="#startGesture" prefHeight="61.0" prefWidth="86.0" style="-fx-background-color: cyan;" styleClass="gesture" stylesheets="@application.css" textFill="#9a11e4" visible="false">
+                     <font>
+                        <Font name="Century" size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="gestureStop" layoutX="621.0" layoutY="3.0" mnemonicParsing="false" onAction="#stopGesture" prefHeight="61.0" prefWidth="86.0" text="Stop Gesture" textFill="#9a11e4" visible="false">
+                     <font>
+                        <Font name="Century" size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="eyeBtn" disable="true" layoutX="622.0" layoutY="71.0" mnemonicParsing="false" onAction="#startEyeDetect" prefHeight="56.0" prefWidth="86.0" styleClass="eye" stylesheets="@application.css" visible="false" />
+                  <Button fx:id="shapeBtn" layoutX="622.0" layoutY="133.0" mnemonicParsing="false" onAction="#shapeStart" prefHeight="56.0" prefWidth="86.0" styleClass="sqr" stylesheets="@application.css" visible="false" />
+                  <Button fx:id="upperBodyBtn" disable="true" layoutX="622.0" layoutY="196.0" mnemonicParsing="false" onAction="#upperBodyStart" prefHeight="56.0" prefWidth="86.0" styleClass="upperbody" stylesheets="@application.css" text="Upperbody" visible="false">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="smileBtn" disable="true" layoutX="621.0" layoutY="259.0" mnemonicParsing="false" onAction="#smileStart" prefHeight="56.0" prefWidth="86.0" styleClass="smiles" stylesheets="@application.css" text="Smile" visible="false" />
+                  <Button fx:id="fullBodyBtn" disable="true" layoutX="621.0" layoutY="322.0" mnemonicParsing="false" onAction="#fullBodyStart" prefHeight="56.0" prefWidth="86.0" styleClass="fullbody" stylesheets="@application.css" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="Poiret One" size="23.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TitledPane>
+   </center>
+   <left>
+      <TitledPane fx:id="dataPane" disable="true" prefHeight="528.0" prefWidth="302.0" text="Retrived Information" BorderPane.alignment="CENTER">
+         <content>
+            <SplitPane dividerPositions="0.00597609561752988, 0.017928286852589643" orientation="VERTICAL" prefHeight="276.0" prefWidth="300.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="300.0" visible="false">
+                     <children>
+                        <TextField fx:id="code" layoutX="105.0" layoutY="62.0" prefHeight="25.0" prefWidth="181.0" promptText="Unique Face code">
+                           <effect>
+                              <DropShadow />
+                           </effect></TextField>
+                        <Label layoutX="44.0" layoutY="60.0" text="Skey">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fname" layoutX="105.0" layoutY="112.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter First Name">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets></TextField>
+                        <Label layoutX="33.0" layoutY="110.0" text="FName">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lname" layoutX="105.0" layoutY="160.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter Last name">
+                           <effect>
+                              <DropShadow />
+                           </effect></TextField>
+                        <Label layoutX="33.0" layoutY="157.0" text="LName">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="reg" layoutX="105.0" layoutY="204.0" prefHeight="25.0" prefWidth="181.0" promptText="Reg.No">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </TextField>
+                        <Label layoutX="33.0" layoutY="204.0" text=" Reg .">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="39.0" layoutY="39.0" prefHeight="6.0" prefWidth="239.0" />
+                        <TextField fx:id="age" layoutX="105.0" layoutY="258.0" prefHeight="25.0" prefWidth="181.0">
+                           <effect>
+                              <DropShadow />
+                           </effect></TextField>
+                        <Label layoutX="40.0" layoutY="256.0" text="Age">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="sec" layoutX="105.0" layoutY="301.0" prefHeight="25.0" prefWidth="181.0">
+                           <effect>
+                              <DropShadow />
+                           </effect></TextField>
+                        <Label layoutX="26.0" layoutY="299.0" text="Section">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="title" layoutX="44.0" prefHeight="0.0" prefWidth="246.0" text="Enter Credentials">
+                           <font>
+                              <Font name="Vermin Vibes 4 Helium" size="30.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#e41b1b" />
+                                    <Stop color="#1c59c3" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children></AnchorPane>
+                <AnchorPane fx:id="pdPane" minHeight="0.0" minWidth="0.0" prefHeight="147.0" prefWidth="300.0">
+                     <children>
+                        <ImageView fx:id="motionView" fitHeight="211.0" fitWidth="298.0" layoutX="2.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+                  <ListView fx:id="output" editable="true" prefHeight="227.0" prefWidth="300.0" style="-fx-padding: 10;">
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </ListView>
+              </items>
+            </SplitPane>
+         </content></TitledPane>
+   </left>
+   <right>
+      <TitledPane animated="false" prefHeight="524.0" prefWidth="266.0" text="Log Book" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="338.0">
+               <children>
+                  <SplitPane layoutX="2.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="496.0" prefWidth="280.0">
+                    <items>
+                        <ScrollPane prefHeight="494.0" prefViewportHeight="244.0" prefViewportWidth="328.0" prefWidth="314.0">
+                           <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="329.0">
+                                 <children>
+                                    <Label layoutX="102.0" layoutY="5.0" text="Status" textFill="#383636">
+                                       <font>
+                                          <Font name="Vermin Vibes 4 Helium" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="77.0" layoutY="37.0" prefHeight="5.0" prefWidth="123.0" />
+                                    <ListView fx:id="logList" editable="true" layoutX="4.0" layoutY="37.0" prefHeight="203.0" prefWidth="256.0" style="-fx-padding: 10;">
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </ListView>
+                                    <Separator layoutX="77.0" layoutY="272.0" prefHeight="5.0" prefWidth="123.0" />
+                                    <Button fx:id="stopRecBtn" disable="true" layoutX="155.0" layoutY="284.0" minWidth="65.0" mnemonicParsing="false" onAction="#stopRecognise" prefHeight="60.0" prefWidth="65.0" styleClass="stop2" stylesheets="@application.css" text="STOP" textFill="#fa1111" visible="false">
+                                       <font>
+                                          <Font name="Gabriola" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="motionBtn" disable="true" layoutX="62.0" layoutY="274.0" mnemonicParsing="false" onAction="#startMotion" prefHeight="55.0" prefWidth="163.0" styleClass="motion" stylesheets="@application.css" visible="false">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.30952380952380953" proportional="false" startX="0.49523809523809526" startY="0.7904761904761906">
+                                             <stops>
+                                                <Stop color="#b81dc2" />
+                                                <Stop color="BLACK" offset="0.29813958999881496" />
+                                                <Stop color="#ffffff00" offset="0.4099616858237546" />
+                                                <Stop color="BLACK" offset="0.5223367697594502" />
+                                                <Stop color="BLACK" offset="0.6717620571157717" />
+                                                <Stop color="BLACK" offset="0.742979025950942" />
+                                                <Stop color="#1a16e0" offset="0.9441876999644507" />
+                                                <Stop color="#1de31700" offset="1.0" />
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Button>
+                                    <Button fx:id="recogniseBtn" disable="true" layoutX="27.0" layoutY="304.0" minWidth="82.0" mnemonicParsing="false" onAction="#faceRecognise" prefHeight="60.0" prefWidth="82.0" style="-fx-background-color: gold;" stylesheets="@application.css" text="Enable Security" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="savef" fx:id="saveBtn" disable="true" layoutX="32.0" layoutY="400.0" mnemonicParsing="false" onAction="#saveFace" prefHeight="55.0" prefWidth="91.0" stylesheets="@application.css" visible="false" />
+                                    <Button fx:id="startCam" layoutX="165.0" layoutY="304.0" minHeight="44.0" minWidth="74.0" mnemonicParsing="false" onAction="#startCamera" pickOnBounds="false" prefHeight="60.0" prefWidth="74.0" styleClass="aaa" stylesheets="@application.css" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+        </content>
+      </TitledPane>
+   </right>
+   <bottom>
+      <Pane prefHeight="0.0" prefWidth="1359.0" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane expanded="false" layoutX="7.0" opacity="0.8" prefHeight="190.0" prefWidth="991.0" text="Face Database" visible="false">
+              <content>
+                  <ScrollPane prefHeight="164.0" prefViewportHeight="180.0" prefViewportWidth="1348.0" prefWidth="278.0">
+                     <content>
+                        <TilePane fx:id="tile" hgap="30.0" orientation="VERTICAL" prefHeight="181.0" prefWidth="1363.0" vgap="30.0">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding>
+                           <effect>
+                              <Glow>
+                                 <input>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </TilePane>
+                     </content>
+                  </ScrollPane>
+              </content>
+            </TitledPane>
+         </children>
+      </Pane>
+   </bottom>
+   <top>
+      <Label prefHeight="17.0" prefWidth="605.0" text="FACE RECOGNITION" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#e80000" />
+                  <Stop color="#00e5b6" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </top>
+</BorderPane>
